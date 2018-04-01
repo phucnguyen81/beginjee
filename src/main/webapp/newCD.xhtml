@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:h="http://xmlns.jcp.org/jsf/html"
+  xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+  xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="layout.xhtml">
+
+  <ui:define name="title">Create a new CD</ui:define>
+
+  <ui:define name="content">
+
+    <h:form id="cdForm">
+
+      <h:panelGrid columns="2">
+        <h:outputLabel value="Title : " />
+        <h:inputText value="#{cdController.cd.title}" />
+
+        <h:outputLabel value="Price (dollar) : " />
+        <h:inputText value="#{cdController.cd.price}" />
+
+        <h:outputLabel value="Description : " />
+        <h:inputTextarea value="#{cdController.cd.description}"
+          cols="16" rows="3" />
+
+        <h:outputLabel value="Number of CDs : " />
+        <h:inputText value="#{cdController.cd.numberOfCDs}" />
+
+        <h:outputLabel value="Total duration (in mins) : " />
+        <h:inputText value="#{cdController.cd.totalDuration}" />
+
+        <h:outputLabel value="Genre : " />
+        <h:inputText value="#{cdController.cd.genre}" />
+      </h:panelGrid>
+
+      <h:commandButton value="Create a CD"
+        action="#{cdController.createCd}" styleClass="submit">
+        <f:ajax execute="@form" render=":cdlist :errors" />
+      </h:commandButton>
+
+    </h:form>
+
+    <hr />
+    <h1>List of CDs</h1>
+
+    <h:dataTable id="cdlist" value="#{cdController.findAll()}" var="cd"
+      border="1">
+
+      <h:column>
+        <f:facet name="header">
+          <h:outputText value="Title" />
+        </f:facet>
+        <h:link value="#{cd.title}" outcome="viewCD?id=#{cd.id}" />
+      </h:column>
+
+      <h:column>
+        <f:facet name="header">
+          <h:outputText value="Price" />
+        </f:facet>
+        <h:outputText value="#{cd.price}" />
+      </h:column>
+
+    </h:dataTable>
+
+  </ui:define>
+
+</ui:composition>
+</html>

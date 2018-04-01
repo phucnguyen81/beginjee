@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+# undeploy the app
+gf4 start-domain
+gf4 undeploy beginjee
+
+# restart server
+gf4 stop-domain
+gf4 start-domain
+
+# redeploy
+gf4 deploy target/beginjee.war

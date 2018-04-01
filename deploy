@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+# package then run integration tests
+mvn clean
+mvn package
+mvn verify
+
+# call redeploy
+./redeploy

@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:h="http://xmlns.jcp.org/jsf/html"
+  xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+  xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="layout.xhtml">
+
+  <f:metadata>
+    <f:viewParam name="id" value="#{cdController.cd.id}" />
+    <f:viewAction action="#{cdController.findById}" />
+  </f:metadata>
+
+  <ui:define name="links">
+    <h:link value="Create a CD" outcome="newCD" />
+  </ui:define>
+
+  <ui:define name="title">View a CD</ui:define>
+
+  <ui:define name="content">
+    <h:form>
+      <h:panelGrid columns="2">
+        <h:outputLabel value="Title : " />
+        <h:outputText value="#{cdController.cd.title}" />
+
+        <h:outputLabel value="Price : " />
+        <h:outputText value="#{cdController.cd.price}">
+          <f:convertNumber currencySymbol="$" type="currency" />
+        </h:outputText>
+
+        <h:outputLabel value="Description : " />
+        <h:outputText value="#{cdController.cd.description}" cols="16"
+          rows="3" />
+
+        <h:outputLabel value="Number of CDs : " />
+        <h:outputText value="#{cdController.cd.numberOfCDs}" />
+
+        <h:outputLabel value="Total Duration : " />
+        <h:outputText value="#{cdController.cd.totalDuration} mins" />
+
+        <h:outputLabel value="Genre : " />
+        <h:outputText value="#{cdController.cd.genre}" />
+      </h:panelGrid>
+    </h:form>
+  </ui:define>
+
+</ui:composition>
+</html>
